@@ -1,4 +1,5 @@
-#!/opt/studbot/bin/python3.10
+#Супер базовый вариант бота
+#Бот должен отправлять фото при выборе направления см папку photo 
 
 import logging
 import sqlite3
@@ -16,9 +17,9 @@ from aiogram.types import Message, InlineKeyboardButton, contact
 from aiogram.utils.exceptions import (MessageToEditNotFound, MessageCantBeEdited, MessageCantBeDeleted,
                                       MessageToDeleteNotFound)
 
-API_TOKEN = '6976515071:AAEoQKuWyo5IpuW257iJex-A2hCAfSxY_VQ'
-ADMIN = 417905942
-OLEG = 498487337
+API_TOKEN = 'bot_token'
+ADMIN = 'tg id admin"
+REC = 'id получателя'
 oleg_chat_id = 0
 user_data = {}
 #local_server=TelegramAPIServer.from_base('http://localhos')
@@ -103,26 +104,26 @@ async def IB(callback_query: types.CallbackQuery):
 
 @dp.message_handler(state=dialog.send_contact_dev, content_types=types.ContentType.CONTACT)
 async def proc(message: types.Message, state: FSMContext):
-    await bot.send_contact(OLEG, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number)
-    await bot.send_message(OLEG, text="dev")
+    await bot.send_contact(REC, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number)
+    await bot.send_message(REC, text="dev")
     await state.finish()
 
 @dp.message_handler(state=dialog.send_contact_win, content_types=types.ContentType.CONTACT)
 async def proc(message: types.Message, state: FSMContext):
-    await bot.send_contact(OLEG, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number)
-    await bot.send_message(OLEG, text="win")
+    await bot.send_contact(REC, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number)
+    await bot.send_message(REC, text="win")
     await state.finish()
 
 @dp.message_handler(state=dialog.send_contact_IB, content_types=types.ContentType.CONTACT)
 async def proc(message: types.Message, state: FSMContext):
-    await bot.send_contact(OLEG, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number)
-    await bot.send_message(OLEG, text="IB")
+    await bot.send_contact(REC, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number)
+    await bot.send_message(REC, text="IB")
     await state.finish()
 
 @dp.message_handler(state=dialog.send_contact_lin, content_types=types.ContentType.CONTACT)
 async def proc(message: types.Message, state: FSMContext):
-    await bot.send_contact(OLEG, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number)
-    await bot.send_message(OLEG, text="linux")
+    await bot.send_contact(REC, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number)
+    await bot.send_message(REC, text="linux")
     await state.finish()
 
 
