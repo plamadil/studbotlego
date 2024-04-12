@@ -101,10 +101,10 @@ async def IB(callback_query: types.CallbackQuery):
     await bot.send_message(callback_query.from_user.id,"Отправь карточку контакта")
     await dialog.send_contact_IB.set()
 
-
+# Функции отправки данных студента руководителю
 @dp.message_handler(state=dialog.send_contact_dev, content_types=types.ContentType.CONTACT)
 async def proc(message: types.Message, state: FSMContext):
-    await bot.send_contact(REC, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number)
+    await bot.send_contact(REC, first_name=message.contact.first_name, last_name=message.contact.last_name, phone_number=message.contact.phone_number) 
     await bot.send_message(REC, text="dev")
     await state.finish()
 
