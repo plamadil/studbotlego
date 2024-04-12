@@ -42,27 +42,27 @@ class dialog(StatesGroup):
     send_contact_IB = State()
     send_contact_lin = State()
 
-
+#Начальное меню с выбором направления
 @dp.message_handler(commands=['start'])
 async def info(message: types.Message):
     adkb = types.InlineKeyboardMarkup(resize_keyboard=True)
-    adkb.add(types.InlineKeyboardButton(text="Дэвы/Разработка", callback_data='dev'))
+    adkb.add(types.InlineKeyboardButton(text="Дэвы/Разработка", callback_data='dev')) # callback_data используются для связи элиментов бота (как пример 49 строка через callback_data='dev' вызывает 56 @dp.callback_query_handler(lambda c: c.data == 'dev')
     adkb.add(types.InlineKeyboardButton(text="Администрирование Windows", callback_data='windows'))
     adkb.add(types.InlineKeyboardButton(text="Практические задания Linux/bsd", callback_data='linux'))
     adkb.add(types.InlineKeyboardButton(text="Проекты ИБ Безопасность", callback_data='IB'))
     await message.answer('Привет Мы получили твою Анкету.Выбери направление', reply_markup=adkb)
 
-
+#Наропавлени практики
 @dp.callback_query_handler(lambda c: c.data == 'dev')
 async def sev(callback_query: types.CallbackQuery):
-    kkb = types.ReplyKeyboardMarkup()
-    bbt = types.KeyboardButton('Отправить контакт', request_contact=True)
-    kkb.add(bbt)
+    kkb = types.ReplyKeyboardMarkup() # Обьявление клавиатуры 
+    bbt = types.KeyboardButton('Отправить контакт', request_contact=True) # Добавление кнопки в клавиатуру
+    kkb.add(bbt) #Вызов клавиатуры 
     await bot.send_message(callback_query.from_user.id,
                            '2001 Развёртка среды LAMP \n2004 Создание телеграм бота на выделенном сервере и интеграция с предыдущими лабораториями \n2002 Наполнение базы / авторизация продолжение \n2003 Наполнение базы данных из авторизированных пользователей продолжение \n2005 модификация системы авторизации на 2х факторную с использованием телеграмм бота \n0000 Изучение лаборатории openvpn esxi \n2005 Создание скриптов на python',reply_markup=kkb)
-    await bot.send_photo(callback_query.from_user.id ,"AgACAgIAAxkBAAIBHWV0e547gPxVYvD0AAH7awFxijI-WAACs9QxG-qGqUuTozpUoiH1RwEAAwIAA3kAAzME",reply_markup=kkb)
+    await bot.send_photo(callback_query.from_user.id ,"AgACAgIAAxkBAAIBHWV0e547gPxVYvD0AAH7awFxijI-WAACs9QxG-qGqUuTozpUoiH1RwEAAwIAA3kAAzME",reply_markup=kkb) # Отправка задания текстом и картинкой
     await bot.send_message(callback_query.from_user.id,"Отправь карточку контакта")
-    await dialog.send_contact_dev.set()
+    await dialog.send_contact_dev.set() 
 
 
 @dp.callback_query_handler(lambda c: c.data == 'windows')
